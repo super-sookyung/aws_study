@@ -9,9 +9,28 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.post('/posttest', (req, res) => {
-  res.send({
-    message: `Hello CEOS ${req.body.name} !
-    Nice to meet you this is aws study example source code.`
+  const nameValue = req.body.name
+  const passwordValue = req.body.password
+  console.log(nameValue)
+  if (nameValue === '' || passwordValue === '') {
+    res.status(404).send({
+      error: `Hello CEOS Study Member !
+      Didn't you miss some field?
+      `
+    })
+  }
+  if (passwordValue === '123456') {
+    res.send({
+      message: `password correct
+      Hello CEOS ${req.body.name} !
+      Nice to meet you this is aws study example source code.
+      `
+    })
+  }
+  res.status(400).send({
+    error: `Dear ${req.body.name}.
+    password wrong. please check your password again.
+    `
   })
 })
 

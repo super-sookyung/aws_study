@@ -12,6 +12,10 @@
       v-model="password"
       placeholder="password">
     <br>
+    <div class="response" v-html="response" />
+    <br>
+    <div class="error" v-html="error" />
+    <br>
     <button
       @click="posttest">
       Post Request
@@ -26,16 +30,24 @@ export default {
   data() {
     return {
       name: '',
-      password: ''
+      password: '',
+      error: null,
+      response: null,
     }
   },
   methods: {
     async posttest() {
-      const response = await AwsService.posttest({
-        name: this.name,
-        password: this.password
-      })
-      console.log(response.data)
+      this.error = null
+      this.response = null
+      try {
+        const response = await AwsService.posttest({
+          name: this.name,
+          password: this.password
+        })
+        this.response = response.data.message
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
