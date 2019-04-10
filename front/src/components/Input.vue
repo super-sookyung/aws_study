@@ -6,8 +6,6 @@
 </template>
 
 <script>
-var card = { suit: "하트", rank: "A" }
-
 export default {
   methods: {
     clickPostRequestBtn() {
