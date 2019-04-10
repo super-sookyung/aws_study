@@ -8,10 +8,11 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.get('/status', (req, res) => {
+app.post('/posttest', (req, res) => {
   res.send({
-    message: 'hello world!'
+    message: `Hello CEOS ${req.body.name} !
+    Nice to meet you this is aws study example source code.`
   })
 })
 
-app.listen(process.env.PORT || 8081)
+app.listen(8081)
