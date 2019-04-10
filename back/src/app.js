@@ -8,6 +8,12 @@ app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 
+app.get('/helloceos', (req, res) => {
+  res.send({
+    message: 'Hello CEOS Developers !'
+  })
+})
+
 app.post('/posttest', (req, res) => {
   const nameValue = req.body.name
   const passwordValue = req.body.password
@@ -26,12 +32,13 @@ app.post('/posttest', (req, res) => {
       Nice to meet you this is aws study example source code.
       `
     })
+  } else {
+    res.status(400).send({
+      error: `Dear ${req.body.name}.
+      password wrong. please check your password again.
+      `
+    })
   }
-  res.status(400).send({
-    error: `Dear ${req.body.name}.
-    password wrong. please check your password again.
-    `
-  })
 })
 
 app.listen(8081)
